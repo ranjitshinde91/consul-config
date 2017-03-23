@@ -2,6 +2,8 @@ package org.gslab.com.consul.configpusher;
 
 import com.orbitz.consul.Consul;
 import com.orbitz.consul.KeyValueClient;
+
+import org.cfg4j.source.context.propertiesprovider.JsonBasedPropertiesProvider;
 import org.cfg4j.source.context.propertiesprovider.PropertiesProvider;
 import org.cfg4j.source.context.propertiesprovider.PropertiesProviderSelector;
 import org.cfg4j.source.context.propertiesprovider.PropertyBasedPropertiesProvider;
@@ -43,7 +45,7 @@ public class ConfigPusher {
 		kvClient = consul.keyValueClient();
 
 		PropertiesProviderSelector propertiesProviderSelector = new PropertiesProviderSelector(new PropertyBasedPropertiesProvider(),
-				new YamlBasedPropertiesProvider());
+				new YamlBasedPropertiesProvider(), new JsonBasedPropertiesProvider());
 
 		Path start = Paths.get(configPath);
 		Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
